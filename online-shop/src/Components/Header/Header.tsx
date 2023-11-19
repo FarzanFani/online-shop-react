@@ -3,7 +3,7 @@ import logo from "../../Assests/logo.png";
 import PersonalInfo from "./PersonalInfo";
 
 const divClasses =
-  "container bg-gray-200 flex justify-between items-center h-20";
+  "2xl:container bg-gray-200 flex justify-between items-center h-20";
 
 const spanClasses = "p-2 bg-red-600 rounded-full inline-block w-10 text-center";
 const paraClasses = "me-3";
