@@ -1,16 +1,24 @@
 import "./App.css";
-import Header from "./Components/Header/Header";
-import ProductCardsContainer from "./Components/ProductsPage/ProductCardsContainer";
-import SearchItems from "./Components/ProductsPage/SearchItems";
+import HomePage from "./Pages/HomePage";
+import RootLayout from "./Pages/RootLayout";
+import ShoppingCartPage from "./Pages/ShoppingCartPage";
+import Test from "./Test";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "shopping-cart", element: <ShoppingCartPage /> },
+    ],
+  },
+]);
 
 function App() {
-  return (
-    <div className="App">
-      <Header />
-      <SearchItems />
-      <ProductCardsContainer />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

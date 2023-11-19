@@ -1,7 +1,7 @@
 import CartTable from "./CartTable";
 import { ShoppingCartStyle as style } from "./ShoppingCartStyles";
 
-const ShoopingCart = () => {
+const ShoppingCart = () => {
   return (
     <div className={style.container}>
       <CartTable />
@@ -9,4 +9,4 @@ const ShoopingCart = () => {
   );
 };
 
-export default ShoopingCart;
+export default ShoppingCart;

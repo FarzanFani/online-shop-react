@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../../Assests/logo.png";
 import PersonalInfo from "./PersonalInfo";
 import { headerStyle as style } from "./headerStyle";
+import { Link } from "react-router-dom";
 
 const divClasses =
   "container w-full bg-gray-800 flex justify-between items-center md:h-20 flex-wrap gap-y-2";
@@ -20,9 +21,11 @@ const speccifyContent = (): React.ReactNode => {
       <div className={style.headerContainer}>
         <PersonalInfo />
         <img src={logo} alt="Page Logo" />
-        <p className={style.cartText}>
-          Cart <span className={style.headerBadge}>5</span>
-        </p>
+        <Link to={"shopping-cart"}>
+          <p className={style.cartText}>
+            Cart <span className={style.headerBadge}>5</span>
+          </p>
+        </Link>
       </div>
     );
   } else {
@@ -30,9 +33,11 @@ const speccifyContent = (): React.ReactNode => {
       <div className={style.headerContainer}>
         <img src={logo} alt="Page Logo" />
         <PersonalInfo />
-        <p className={style.cartText}>
-          Cart <span className={style.headerBadge}>5</span>
-        </p>
+        <Link to={"shopping-cart"}>
+          <p className={style.cartText}>
+            Cart <span className={style.headerBadge}>5</span>
+          </p>
+        </Link>
       </div>
     );
   }
