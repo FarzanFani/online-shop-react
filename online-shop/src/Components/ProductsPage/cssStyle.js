@@ -1,6 +1,5 @@
 export const ProductCardsStyle = {
-  cardContainer:
-    "max-w-sm max-h-screen rounded overflow-hidden shadow-lg bg-white",
+  cardContainer: "max-w-md max-h-xl rounded overflow-hidden shadow-lg bg-white",
   picture: "w-full h-72 object-cover",
   bodyContainer: "px-6 py-4 flex flex-col",
   title: "font-bold text-xl",

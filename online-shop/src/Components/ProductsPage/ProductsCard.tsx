@@ -1,23 +1,33 @@
+import Product from "../../Models/Product";
 import { ProductCardsStyle as style } from "./cssStyle";
 
-const ProductCard = () => {
+const cutString = (inputString: string, maxLength: number): string => {
+  if (inputString.length > maxLength) {
+    return inputString.slice(0, maxLength) + "...";
+  } else {
+    return inputString;
+  }
+};
+
+const ProductCard: React.FC<{ product: Product }> = (props) => {
   return (
     <div className={style.cardContainer}>
       <img
         className={style.picture}
-        src="https://picsum.photos/200"
+        src={props.product.image}
         alt="Card Image"
       />
       <div className={style.bodyContainer}>
-        <span className={style.title}>Card Title</span>
+        <span className={style.title}>
+          {cutString(props.product.title, 25)}
+        </span>
         <p className={style.description}>
-          Card Description goes here. You can provide a brief overview of the
-          content.
+          {cutString(props.product.description, 200)}
         </p>
       </div>
       <div className={style.pricaButtonContainer}>
-        <span className={style.price}>$19.99</span>
-        <button className={style.button}>Learn More</button>
+        <span className={style.price}>${props.product.price}</span>
+        <button className={style.button}>Add</button>
       </div>
     </div>
   );
