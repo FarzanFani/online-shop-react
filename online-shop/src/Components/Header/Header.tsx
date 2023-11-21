@@ -1,16 +1,12 @@
 import React from "react";
-import logo from "../../Assests/logo.png";
+import logo from "../../assets/logo.png";
 import PersonalInfo from "./PersonalInfo";
 import { headerStyle as style } from "./headerStyle";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../../Store/ShoppingCardContext";
 
-const divClasses =
-  "container w-full bg-gray-800 flex justify-between items-center md:h-20 flex-wrap gap-y-2";
-
-const spanClasses = "p-2 bg-red-600 rounded-full inline-block w-10 text-center";
-const paraClasses = "me-3 font-bold text-white";
-
-const speccifyContent = (): React.ReactNode => {
+const speccifyContent = (count: number): React.ReactNode => {
   const pageWidth =
     window.innerWidth ||
     document.documentElement.clientWidth ||
@@ -23,7 +19,7 @@ const speccifyContent = (): React.ReactNode => {
         <img src={logo} alt="Page Logo" />
         <Link to={"shopping-cart"}>
           <p className={style.cartText}>
-            Cart <span className={style.headerBadge}>5</span>
+            Cart <span className={style.headerBadge}>{count}</span>
           </p>
         </Link>
       </div>
@@ -35,7 +31,7 @@ const speccifyContent = (): React.ReactNode => {
         <PersonalInfo />
         <Link to={"shopping-cart"}>
           <p className={style.cartText}>
-            Cart <span className={style.headerBadge}>5</span>
+            Cart <span className={style.headerBadge}>{count}</span>
           </p>
         </Link>
       </div>
@@ -44,7 +40,12 @@ const speccifyContent = (): React.ReactNode => {
 };
 
 const Header = () => {
-  return <>{speccifyContent()}</>;
+  const { items } = useContext(CartContext);
+
+  const calcItemLen = () =>
+    items.reduce((prev, current) => prev + current.quantity, 0);
+
+  return <>{speccifyContent(calcItemLen())}</>;
 };
 
 export default Header;

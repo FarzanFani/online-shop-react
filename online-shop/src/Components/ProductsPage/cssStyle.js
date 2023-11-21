@@ -13,3 +13,8 @@ export const ProductCardsStyle = {
 export const cardsContainerStyle = {
   container: "flex items-center justify-center my-20 gap-4 flex-wrap",
 };
+
+export const searchBarStyle = {
+  searchBox:
+    "border-2 border-black rounded-md h-9 col-span-6 md:col-span-3 ps-2",
+};

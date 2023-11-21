@@ -9,3 +9,7 @@ export const personalInfoStyle = {
   container: "flex items-center ms-5",
   name: "ms-3 text-white fone-bold",
 };
+
+export const dropDownStyle = {
+  select: "border-2 border-black rounded-md h-9 col-span-6 sm:col-span-3 ps-2",
+};

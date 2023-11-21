@@ -1,14 +1,26 @@
-const cssClass =
-  "border-2 border-black rounded-md h-9 col-span-6 md:col-span-3 ps-2";
+import { searchBarStyle as style } from "./cssStyle";
+import { useEffect, useState, useContext } from "react";
+import { CartContext } from "../../Store/ShoppingCardContext";
 
-const SearchBar = () => {
+const SearchBar: React.FC = () => {
+  const [input, setInput] = useState<string>("");
+
+  const cartCtx = useContext(CartContext);
+
+  const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    // cartCtx.filterItem(input);
+    cartCtx.filterQuery(value);
+  };
+
   return (
     <input
       type="text"
       name="search-bar"
       id="search-bar"
-      className={cssClass}
+      className={style.searchBox}
       placeholder="Serach..."
+      onChange={onInputChange}
     />
   );
 };

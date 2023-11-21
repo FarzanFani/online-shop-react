@@ -1,4 +1,7 @@
+import Product from "../../Models/Product";
 import { cartItemStyles as style } from "./ShoppingCartStyles";
+import { CartContext } from "../../Store/ShoppingCardContext";
+import { useContext } from "react";
 
 const icon: React.ReactNode = (
   <svg
@@ -13,21 +16,57 @@ const icon: React.ReactNode = (
   </svg>
 );
 
-const CartItem = () => {
+const cutString = (inputString: string, maxLength: number): string => {
+  if (inputString.length > maxLength) {
+    return inputString.slice(0, maxLength) + "...";
+  } else {
+    return inputString;
+  }
+};
+
+const calcTotalPrice = (quantity: number = 1, price: number): number => {
+  return quantity * price;
+};
+
+const CartItem: React.FC<{ item: Product; cellNum: number }> = (props) => {
+  const cartCtx = useContext(CartContext);
+
+  const plusBtnHandler = () => {
+    cartCtx.updatedQuantityHandler(props.item.id, 1, cartCtx.products);
+  };
+
+  const minusBtnHandler = () => {
+    cartCtx.updatedQuantityHandler(props.item.id, -1, cartCtx.products);
+  };
+
+  const iconClickHandler = () => {
+    cartCtx.removeSingleItemHandler(props.item.id);
+  };
+
   return (
     <tr className={style.tableRow}>
-      <td className={style.tableCells}>1</td>
-      <td className={style.tableCells}>Product A</td>
-      <td className={style.tableCells}>Description A</td>
-      <td className={style.tableCells + style.quantityCell}>
-        <button className={style.minusBtn}>-</button>
-        <span>3</span>
-        <button className={style.plusBtn}>+</button>
+      <td className={style.tableCells}>{props.cellNum}</td>
+      <td className={style.tableCells}>{cutString(props.item.title, 30)}</td>
+      <td className={style.tableCells}>
+        {cutString(props.item.description, 30)}
       </td>
-      <td className={style.tableCells}>$10.00</td>
+      <td className={style.tableCells + style.quantityCell}>
+        <button className={style.minusBtn} onClick={minusBtnHandler}>
+          -
+        </button>
+        <span>{props.item.quantity}</span>
+        <button className={style.plusBtn} onClick={plusBtnHandler}>
+          +
+        </button>
+      </td>
+      <td className={style.tableCells}>${props.item.price}</td>
       <td className={style.totalPriceCell}>
-        <span className={style.priceValue}>$30.00</span>
-        <span className={style.trashIcon}>{icon}</span>
+        <span className={style.priceValue}>
+          ${calcTotalPrice(props.item.quantity, props.item.price).toFixed(2)}
+        </span>
+        <span className={style.trashIcon} onClick={iconClickHandler}>
+          {icon}
+        </span>
       </td>
     </tr>
   );
