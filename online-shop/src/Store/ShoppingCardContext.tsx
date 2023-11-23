@@ -7,11 +7,7 @@ type CartContextObj = {
   products: Product[];
   filteredList: Product[];
   api: string;
-  updatedQuantityHandler: (
-    id: number,
-    amount: number,
-    productList: Product[]
-  ) => any;
+  updatedQuantityHandler: (id: number, amount: number, productList: Product[]) => any;
   removeSingleItemHandler: (id: number) => void;
   apiChangeHandler: (newApi: string) => void;
   filterQuery: (value: string) => void;
@@ -22,10 +18,10 @@ export const CartContext = createContext<CartContextObj>({
   products: [],
   filteredList: [],
   api: "https://fakestoreapi.com/products/",
-  updatedQuantityHandler: () => {},
-  removeSingleItemHandler: () => {},
-  apiChangeHandler: () => {},
-  filterQuery: () => {},
+  updatedQuantityHandler: () => undefined,
+  removeSingleItemHandler: () => undefined,
+  apiChangeHandler: () => undefined,
+  filterQuery: () => undefined,
 });
 
 interface CartContextProviderProps {
@@ -36,9 +32,7 @@ const findItem = (itemList: Product[], id: number): number => {
   return itemList.findIndex((item) => item.id === id);
 };
 
-export const CartContextProvider: FC<CartContextProviderProps> = ({
-  children,
-}) => {
+export const CartContextProvider: FC<CartContextProviderProps> = ({ children }) => {
   const [items, setItems] = useState<Product[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [api, setApi] = useState<string>("https://fakestoreapi.com/products/");
@@ -109,11 +103,7 @@ export const CartContextProvider: FC<CartContextProviderProps> = ({
   useEffect(() => {
     const filterItem = (value: string): void => {
       if (value.trim().length > 0) {
-        setFilterList(
-          products.filter((p) =>
-            p.title.toLowerCase().includes(value.toLowerCase())
-          )
-        );
+        setFilterList(products.filter((p) => p.title.toLowerCase().includes(value.toLowerCase())));
       } else {
         setFilterList(products);
       }
@@ -139,9 +129,7 @@ export const CartContextProvider: FC<CartContextProviderProps> = ({
     filterQuery,
   };
 
-  return (
-    <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>
-  );
+  return <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>;
 };
 
 export default CartContextProvider;
