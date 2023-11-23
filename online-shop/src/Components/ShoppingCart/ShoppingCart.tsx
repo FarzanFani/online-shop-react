@@ -1,15 +1,18 @@
 import CartTable from "./CartTable";
 import { ShoppingCartStyle as style } from "./ShoppingCartStyles";
 import { Link } from "react-router-dom";
+import React from "react";
 
-const ShoppingCart = () => {
+const ShoppingCart: React.FC = () => {
   return (
-    <div className={style.container}>
-      <Link to={"/"}>
+    <>
+    <Link to={"/"}>
         <p className={style.homePageBtn}>Home Page</p>
       </Link>
+    <div className={style.container}>
       <CartTable />
     </div>
+    </>
   );
 };
 

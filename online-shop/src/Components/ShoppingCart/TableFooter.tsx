@@ -1,5 +1,5 @@
 import { cartTableStyle as style } from "./ShoppingCartStyles";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { CartContext } from "../../Store/ShoppingCardContext";
 import Product from "../../Models/Product";
 
@@ -11,6 +11,7 @@ const calcTotalPrice = (items: Product[]): number => {
 };
 
 const TableFooter: React.FC = () => {
+  
   const { items } = useContext(CartContext);
 
   return (

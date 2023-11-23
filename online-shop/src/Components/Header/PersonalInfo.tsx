@@ -1,6 +1,7 @@
 import { personalInfoStyle as style } from "./headerStyle";
+import React from "react";
 
-const PersonalInfo = () => {
+const PersonalInfo: React.FC = () => {
   return (
     <div className={style.container}>
       <svg

@@ -1,6 +1,6 @@
 import Product from "../../Models/Product";
 import { ProductCardsStyle as style } from "./cssStyle";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { CartContext } from "../../Store/ShoppingCardContext";
 
 const cutString = (inputString: string, maxLength: number): string => {

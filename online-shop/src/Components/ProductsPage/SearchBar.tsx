@@ -1,6 +1,6 @@
 import { searchBarStyle as style } from "./cssStyle";
-import { useEffect, useState, useContext } from "react";
-import { CartContext } from "../../Store/ShoppingCardContext";
+import { useState, useContext } from "react";
+import React, { CartContext } from "../../Store/ShoppingCardContext";
 
 const SearchBar: React.FC = () => {
   const [input, setInput] = useState<string>("");

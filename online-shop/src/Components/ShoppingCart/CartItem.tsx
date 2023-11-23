@@ -1,7 +1,7 @@
 import Product from "../../Models/Product";
 import { cartItemStyles as style } from "./ShoppingCartStyles";
 import { CartContext } from "../../Store/ShoppingCardContext";
-import { useContext } from "react";
+import React, { useContext } from "react";
 
 const icon: React.ReactNode = (
   <svg
@@ -24,7 +24,7 @@ const cutString = (inputString: string, maxLength: number): string => {
   }
 };
 
-const calcTotalPrice = (quantity: number = 1, price: number): number => {
+const calcTotalPrice = (quantity: number, price: number) => {
   return quantity * price;
 };
 

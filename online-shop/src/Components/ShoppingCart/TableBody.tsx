@@ -1,8 +1,8 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { CartContext } from "../../Store/ShoppingCardContext";
 import CartItem from "./CartItem";
 
-const style: string = "text-red-600 text-center font-bold text-xl";
+const style = "text-red-600 text-center font-bold text-xl";
 const emptyItem = (
   <tr>
     <td className={style} colSpan={6}>

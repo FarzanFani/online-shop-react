@@ -22,5 +22,5 @@ export const cartTableStyle = {
 export const ShoppingCartStyle = {
   container: "relative overflow-x-auto shadow-md sm:rounded-lg mt-10",
   homePageBtn:
-    "text-2xl font-bold mb-10 border-b-4 border-black w-40 m-auto text-center",
+    "text-2xl font-bold mb-10 border-b-4 border-black w-40 m-auto text-center mt-10",
 };

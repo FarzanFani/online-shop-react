@@ -1,5 +1,6 @@
 import { createContext, FC, ReactNode, useState, useEffect } from "react";
 import Product from "../Models/Product";
+import React, { useMemo } from "react";
 
 type CartContextObj = {
   items: Product[];
@@ -58,50 +59,52 @@ export const CartContextProvider: FC<CartContextProviderProps> = ({
           updatedProduct.map((item) => (item.quantity = 0));
           return updatedProduct;
         });
-      } catch (error: any) {
+      } catch (error:any) {
         console.log(error.message);
       }
     };
     fetchData();
   }, [api]);
 
-  const updatedQuantityHandler = (
-    id: number,
-    amount: number,
-    originalItems: Product[]
-  ): void => {
-    setItems((prevItems) => {
-      const updatedItems = [...prevItems];
-      const updatedIndex = findItem(updatedItems, id);
-      // if product isn't in the list
-      if (updatedIndex === -1) {
-        const index = findItem(originalItems, id);
-        const product: Product = originalItems[index];
-        product.quantity += amount;
-        return prevItems.concat(product);
-      }
-      //if product is avalable already
-      const updatedItem = {
-        ...updatedItems[updatedIndex],
-      };
-      updatedItem.quantity += amount;
-      // if quantity less than 1 we have to remove the item from list
-      if (updatedItem.quantity <= 0) {
-        updatedItems.splice(updatedIndex, 1);
-      } else {
-        updatedItems[updatedIndex] = updatedItem;
-      }
-      return updatedItems;
-    });
-  };
+  const updatedQuantityHandler = useMemo(
+    () => (id: number, amount: number, originalItems: Product[]): void => {
+      setItems((prevItems) => {
+        const updatedItems = [...prevItems];
+        const updatedIndex = findItem(updatedItems, id);
+        if (updatedIndex === -1) {
+          const index = findItem(originalItems, id);
+          const product: Product = originalItems[index];
+          product.quantity += amount;
+          return prevItems.concat(product);
+        }
+        const updatedItem = {
+          ...updatedItems[updatedIndex],
+        };
+        updatedItem.quantity += amount;
+        if (updatedItem.quantity <= 0) {
+          updatedItems.splice(updatedIndex, 1);
+        } else {
+          updatedItems[updatedIndex] = updatedItem;
+        }
+        return updatedItems;
+      });
+    },
+    []
+  );
 
-  const apiChangeHandler = (newApi: string): void => {
-    setApi(newApi);
-  };
+  const apiChangeHandler = useMemo(
+    () => (newApi: string): void => {
+      setApi(newApi);
+    },
+    []
+  );
 
-  const removeSingleItemHandler = (id: number): void => {
-    setItems((pervItems) => pervItems.filter((item) => item.id !== id));
-  };
+  const removeSingleItemHandler = useMemo(
+    () => (id: number): void => {
+      setItems((pervItems) => pervItems.filter((item) => item.id !== id));
+    },
+    []
+  );
 
   useEffect(() => {
     const filterItem = (value: string): void => {
@@ -118,9 +121,12 @@ export const CartContextProvider: FC<CartContextProviderProps> = ({
     filterItem(query);
   }, [products, query]);
 
-  const filterQuery = (value: string): void => {
-    setQuery(value);
-  };
+  const filterQuery = useMemo(
+    () => (value: string): void => {
+      setQuery(value);
+    },
+    []
+  );
 
   const contextValue: CartContextObj = {
     items,

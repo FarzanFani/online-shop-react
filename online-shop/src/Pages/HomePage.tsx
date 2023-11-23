@@ -1,7 +1,8 @@
 import ProductCardsContainer from "../Components/ProductsPage/ProductCardsContainer";
 import SearchItems from "../Components/ProductsPage/SearchItems";
+import React from "react";
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
     <>
       <SearchItems />

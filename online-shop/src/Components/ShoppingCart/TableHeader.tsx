@@ -1,4 +1,5 @@
 import { cartTableStyle as style } from "./ShoppingCartStyles";
+import React from "react";
 
 const TableHeader: React.FC = () => {
   return (
@@ -15,4 +16,4 @@ const TableHeader: React.FC = () => {
   );
 };
 
-export default TableHeader;
+export default React.memo(TableHeader);

@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import Header from "../Components/Header/Header";
+import React,{memo} from "react";
 
-const ErrorPages = () => {
+const ErrorPages: React.FC = () => {
   return (
     <>
       <Header />
@@ -18,4 +19,4 @@ const ErrorPages = () => {
   );
 };
 
-export default ErrorPages;
+export default memo(ErrorPages);

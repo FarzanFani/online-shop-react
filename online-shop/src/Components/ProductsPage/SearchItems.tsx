@@ -1,6 +1,6 @@
 import SearchBar from "./SearchBar";
 import Dropdown from "./Dropdown";
-import { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { CartContext } from "../../Store/ShoppingCardContext";
 
 const cssClass =
@@ -12,7 +12,7 @@ const SearchItems = () => {
   const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
-    const api: string = "https://fakestoreapi.com/products/categories";
+    const api = "https://fakestoreapi.com/products/categories";
     const fetchData = async (url: string) => {
       try {
         const respose = await fetch(url);
@@ -21,7 +21,7 @@ const SearchItems = () => {
         }
         const result = await respose.json();
         setCategories(result);
-      } catch (error: any) {
+      } catch (error:any) {
         console.log(error.message);
       }
     };

@@ -1,11 +1,12 @@
 import { dropDownStyle as style } from "../Header/headerStyle";
 import { CartContext } from "../../Store/ShoppingCardContext";
-import { useContext } from "react";
+import React, { useContext, useCallback } from "react";
 
 const Dropdown: React.FC<{ options: string[] }> = (props) => {
+
   const cartCtx = useContext(CartContext);
 
-  const selectChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const selectChangeHandler = useCallback<React.ChangeEventHandler<HTMLSelectElement>>((event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
     const api =
       value === "All"
@@ -13,7 +14,7 @@ const Dropdown: React.FC<{ options: string[] }> = (props) => {
         : `https://fakestoreapi.com/products/category/${value}`;
 
     cartCtx.apiChangeHandler(api);
-  };
+  },[cartCtx.api]);
 
   return (
     <select className={style.select} onChange={selectChangeHandler}>
