@@ -1,5 +1,5 @@
 import { cartTableStyle as style } from "./ShoppingCartStyles";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../Store/ShoppingCardContext";
 import Product from "../../Models/Product";
 
@@ -11,7 +11,25 @@ const calcTotalPrice = (items: Product[]): number => {
 };
 
 const TableFooter: React.FC = () => {
-  
+  const [windowSize, setWindowSize] = useState<{ width: number; height: number }>({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  const handleResize = () => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const { items } = useContext(CartContext);
 
   return (
@@ -20,10 +38,8 @@ const TableFooter: React.FC = () => {
         <th scope="row" className={style.totalText}>
           Total
         </th>
-        <td colSpan={4}></td>
-        <td className={style.totalPrice}>
-          $ {calcTotalPrice(items).toFixed(2)}
-        </td>
+        <td colSpan={windowSize.width > 550 ? 4 : 2}></td>
+        <td className={style.totalPrice}>$ {calcTotalPrice(items).toFixed(2)}</td>
       </tr>
     </tfoot>
   );

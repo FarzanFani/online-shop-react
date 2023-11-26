@@ -12,7 +12,7 @@ export const cartItemStyles = {
 };
 
 export const cartTableStyle = {
-  table: "min-w-full divide-y divide-gray-200",
+  table: "min-w-full divide-y divide-gray-200 max-w-full",
   tableHeader: "py-2 px-4 bg-gray-800 text-white",
   tfRow: "font-semibold text-gray-900 dark:text-white bg-gray-800",
   totalText: "px-4 py-2 text-base",

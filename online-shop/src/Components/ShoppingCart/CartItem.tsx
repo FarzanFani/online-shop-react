@@ -1,7 +1,7 @@
 import Product from "../../Models/Product";
 import { cartItemStyles as style } from "./ShoppingCartStyles";
 import { CartContext } from "../../Store/ShoppingCardContext";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 const icon: React.ReactNode = (
   <svg
@@ -29,6 +29,25 @@ const calcTotalPrice = (quantity: number, price: number) => {
 };
 
 const CartItem: React.FC<{ item: Product; cellNum: number }> = (props) => {
+  const [windowSize, setWindowSize] = useState<{ width: number; height: number }>({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  const handleResize = () => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const cartCtx = useContext(CartContext);
 
   const plusBtnHandler = () => {
@@ -45,11 +64,13 @@ const CartItem: React.FC<{ item: Product; cellNum: number }> = (props) => {
 
   return (
     <tr className={style.tableRow}>
-      <td className={style.tableCells}>{props.cellNum}</td>
+      {windowSize.width > 550 && (
+        <td className={style.tableCells}>{props.cellNum + 1}</td>
+      )}
       <td className={style.tableCells}>{cutString(props.item.title, 30)}</td>
-      <td className={style.tableCells}>
-        {cutString(props.item.description, 30)}
-      </td>
+      {windowSize.width > 550 && (
+        <td className={style.tableCells}>{cutString(props.item.description, 30)}</td>
+      )}
       <td className={style.tableCells + style.quantityCell}>
         <button className={style.minusBtn} onClick={minusBtnHandler}>
           -
